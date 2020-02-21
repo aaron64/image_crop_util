@@ -7,24 +7,26 @@ tile_size = 64
 
 
 def crop(image_name):
-	image = Image.open(r"./input/" + image_name + ".png") 
 	image_params = params[image_name]
 	width  = image_params["w"]
 	height = image_params["h"]
+	frames = image_params["frames"]
 
-	left  = image_size/2 - tile_size * width/2
-	right = image_size/2 + tile_size * width/2
+	left  = image_size/2 - tile_size * width
+	right = image_size/2 + tile_size * width
 
-	top    = image_size - tile_size * height
+	top    = image_size - tile_size * height*2
 	bottom = image_size
 
+	for i in range(0, frames):
+		image = Image.open(r"./input/" + image_name + "/output/" + image_name + str(i) + ".png") 
 
-	cropped_image = image.crop((left, top, right, bottom)) 
-	cropped_image.save("./output/" + image_name + ".png")
+		cropped_image = image.crop((left, top, right, bottom)) 
+		cropped_image.save("./output/" + image_name + "/" + image_name + str(i) + ".png")
 
 with open('images.json') as json_file:
 	params = json.load(json_file)
 
-for image_name in listdir("./input"):
-	crop(image_name.split(".")[0])
+for image_name in params:
+	crop(image_name)
 
