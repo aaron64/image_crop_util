@@ -18,14 +18,24 @@ def crop(image_name):
 	top    = image_size - tile_size * height*2
 	bottom = image_size
 
+	image_width = tile_size * width
+	image_height = tile_size * height
+
+	image_out = Image.new('RGBA', (image_width * 2, image_height * 2 * frames))
+
 	for i in range(0, frames):
 		image = Image.open(r"./input/" + image_name + "/output/" + image_name + str(i) + ".png") 
 
 		cropped_image = image.crop((left, top, right, bottom)) 
-		cropped_image.save("./output/" + image_name + "/" + image_name + str(i) + ".png")
+		image_out.paste(cropped_image, (0, image_height * 2 * i))
+		#cropped_image.save("./output/" + image_name + "/" + image_name + str(i) + ".png")
+
+	image_out.save("./output/" + image_name + "/" + image_name + ".png")
+
 
 with open('images.json') as json_file:
 	params = json.load(json_file)
+
 
 for image_name in params:
 	crop(image_name)
