@@ -3,18 +3,20 @@
 		"w": 3,
 		"h": 5,
 		"frames": 4,
-		"outputPath": "entities/tree/"
+		"outputPath": "tree/",
+		"iconFrame": 1
 	},
 	"player": {
 		"w": 2,
 		"h": 3,
 		"frames": 8,
-		"outputPath": "entities/"
+		"outputPath": ""
 	},
 	"solarPanel": {
 		"w": 3,
 		"h": 4,
 		"frames": 4,
-		"outputPath": "entities/electrical/"
+		"outputPath": "electrical/",
+		"iconFrame": 1
 	}
 }
